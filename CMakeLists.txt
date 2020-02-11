@@ -1,0 +1,29 @@
+cmake_minimum_required(VERSION 3.5)
+project(opencv)
+
+set(PROJECT_DIR ${PROJECT_SOURCE_DIR})
+
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
+set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib)
+
+# This is for CLion
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${LIBRARY_OUTPUT_PATH})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${LIBRARY_OUTPUT_PATH})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${EXECUTABLE_OUTPUT_PATH})
+
+find_package(OpenCV 3 REQUIRED)
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
+set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib)
+
+include_directories(${CMAKE_SOURCE_DIR}/include)
+list(APPEND OPENCV_LINK_LIBS PUBLIC opencv_core)
+list(APPEND OPENCV_LINK_LIBS PUBLIC opencv_imgproc)
+list(APPEND OPENCV_LINK_LIBS PUBLIC opencv_imgcodecs)
+list(APPEND OPENCV_LINK_LIBS PUBLIC opencv_highgui)
+list(APPEND OPENCV_LINK_LIBS PUBLIC opencv_ml)
+list(APPEND OPENCV_LINK_LIBS PUBLIC opencv_video)
+list(APPEND OPENCV_LINK_LIBS PUBLIC opencv_videoio)
+
+add_executable(goodFeatures src/goodFeaturesToTrack.cpp)
+target_link_libraries(goodFeatures ${OPENCV_LINK_LIBS})
+
